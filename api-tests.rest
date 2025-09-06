@@ -1,0 +1,42 @@
+# API Tests for CSE341 Project
+
+# Test the root endpoint
+GET http://localhost:3000/
+
+###
+
+# Get all users
+GET http://localhost:3000/users
+
+###
+
+# Get a single user by ID (replace with actual ID)
+GET http://localhost:3000/users/<ID>
+
+###
+
+# users
+
+[
+  {
+    "_id": "68bac501b1ce9864d03dbc53",
+    "email": "janedoe@test.com",
+    "username": "janedoe@test.com",
+    "name": "Jane",
+    "ipaddress": "102.89.45.12"
+  },
+  {
+    "_id": "68bac501b1ce9864d03dbc54",
+    "email": "mike123@test.com",
+    "username": "mike123@test.com",
+    "name": "Mike",
+    "ipaddress": "154.67.210.89"
+  },
+  {
+    "_id": "68bac501b1ce9864d03dbc55",
+    "email": "sarahk@test.com",
+    "username": "sarahk@test.com",
+    "name": "Sarah",
+    "ipaddress": "197.210.33.47"
+  }
+]
