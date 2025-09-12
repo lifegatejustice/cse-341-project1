@@ -1,42 +1,50 @@
-# API Tests for CSE341 Project
+# API Tests for Contacts API
 
-# Test the root endpoint
-GET http://localhost:3000/
-
-###
-
-# Get all users
+### Get all contacts
 GET http://localhost:3000/users
+Accept: application/json
 
 ###
 
-# Get a single user by ID (replace with actual ID)
+### Get a single contact by ID (replace <ID> with actual contact ID)
 GET http://localhost:3000/users/<ID>
+Accept: application/json
 
 ###
 
-# users
+### Create a new contact
+POST http://localhost:3000/users
+Content-Type: application/json
 
-[
-  {
-    "_id": "68bac501b1ce9864d03dbc53",
-    "email": "janedoe@test.com",
-    "username": "janedoe@test.com",
-    "name": "Jane",
-    "ipaddress": "102.89.45.12"
-  },
-  {
-    "_id": "68bac501b1ce9864d03dbc54",
-    "email": "mike123@test.com",
-    "username": "mike123@test.com",
-    "name": "Mike",
-    "ipaddress": "154.67.210.89"
-  },
-  {
-    "_id": "68bac501b1ce9864d03dbc55",
-    "email": "sarahk@test.com",
-    "username": "sarahk@test.com",
-    "name": "Sarah",
-    "ipaddress": "197.210.33.47"
-  }
-]
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "johndoe@example.com",
+  "favoriteColor": "Blue",
+  "birthday": "1990-01-01"
+}
+
+###
+
+### Update a contact by ID (replace <ID> with actual contact ID)
+PUT http://localhost:3000/users/<ID>
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "janesmith@example.com",
+  "favoriteColor": "Green",
+  "birthday": "1985-05-15"
+}
+
+###
+
+### Delete a contact by ID (replace <ID> with actual contact ID)
+DELETE http://localhost:3000/users/<ID>
+
+###
+
+# Swagger Documentation
+# Access interactive API documentation at: http://localhost:3000/api-docs
+# This provides a GUI to test all API endpoints

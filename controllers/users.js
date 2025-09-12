@@ -19,7 +19,70 @@ const getSingle = async (req, res) => {
     });
 };
 
+const create = async (req, res) => {
+    const newUser = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        favoriteColor: req.body.favoriteColor,
+        birthday: req.body.birthday
+    };
+
+    // Validate all fields are present
+    if (!newUser.firstName || !newUser.lastName || !newUser.email || !newUser.favoriteColor || !newUser.birthday) {
+        res.status(400).json({ message: "All fields are required." });
+        return;
+    }
+
+    const result = await mongodb.getDatabase().db().collection('users').insertOne(newUser);
+    res.status(201).json({ id: result.insertedId });
+};
+
+const update = async (req, res) => {
+    const userId = new ObjectId(req.params.id);
+    const updatedUser = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        favoriteColor: req.body.favoriteColor,
+        birthday: req.body.birthday
+    };
+
+    // Validate all fields are present
+    if (!updatedUser.firstName || !updatedUser.lastName || !updatedUser.email || !updatedUser.favoriteColor || !updatedUser.birthday) {
+        res.status(400).json({ message: "All fields are required." });
+        return;
+    }
+
+    const result = await mongodb.getDatabase().db().collection('users').updateOne(
+        { _id: userId },
+        { $set: updatedUser }
+    );
+
+    if (result.matchedCount === 0) {
+        res.status(404).json({ message: "Contact not found." });
+        return;
+    }
+
+    res.status(204).send();
+};
+
+const remove = async (req, res) => {
+    const userId = new ObjectId(req.params.id);
+    const result = await mongodb.getDatabase().db().collection('users').deleteOne({ _id: userId });
+
+    if (result.deletedCount === 0) {
+        res.status(404).json({ message: "Contact not found." });
+        return;
+    }
+
+    res.status(204).send();
+};
+
 module.exports = {
   getAll,
-  getSingle
+  getSingle,
+  create,
+  update,
+  remove
 };
